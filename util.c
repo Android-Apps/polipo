@@ -795,6 +795,13 @@ intListCons(int from, int to, IntListPtr list)
 #if defined(__linux__)
 
 #include <sys/sysinfo.h>
+#ifdef ANDROID
+int
+physicalMemory()
+{
+	return -1;
+}
+#else
 int
 physicalMemory()
 {
@@ -810,7 +817,7 @@ physicalMemory()
 
     return -1;
 }
-
+#endif
 #elif defined(__FreeBSD__)
 
 #include <sys/sysctl.h>
